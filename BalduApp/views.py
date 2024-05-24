@@ -6,6 +6,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 
+def startPage(request): # Сторінка з вибором реєстрації або логіном
+    return render(request, 'BalduApp/startPage.html')
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -15,7 +18,7 @@ def register(request):
             return redirect('profile')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'BalduApp/register.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -26,8 +29,8 @@ def login_view(request):
             login(request, user)
             return redirect('profile')
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'login.html')
+            return render(request, 'BalduApp/login.html', {'error': 'Invalid credentials'})
+    return render(request, 'BalduApp/login.html')
 
 def logout_view(request):
     logout(request)
@@ -35,4 +38,4 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    return render(request, 'BalduApp/profile.html')
