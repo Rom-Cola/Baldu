@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Chat</title>
+</head>
+<body>
+    <h1>Start a New Chat</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Start Chat</button>
+    </form>
+    <a href="{% url 'main_page' %}">Back to Main Page</a>
+</body>
+</html>

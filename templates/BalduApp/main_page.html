@@ -9,8 +9,8 @@
     <h2>Chats</h2>
     <ul>
         {% if chat_users %}
-            {% for username in chat_users %}
-                <li>Chat with {{ username }}</li>
+            {% for chat in chat_users %}
+                <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}">Chat with {{ chat.username }}</a></li>
             {% endfor %}
         {% else %}
             <li>No chats available</li>
@@ -27,5 +27,12 @@
             <li>No recommendations available</li>
         {% endif %}
     </ul>
+
+    <h2>Start a New Chat</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Start Chat</button>
+    </form>
 </body>
 </html>
