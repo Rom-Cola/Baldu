@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+
+    <h2>Chats</h2>
+    <ul>
+        {% if chat_users %}
+            {% for username in chat_users %}
+                <li>Chat with {{ username }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No chats available</li>
+        {% endif %}
+    </ul>
+
+    <h2>Recommendations</h2>
+    <ul>
+        {% if recommendations %}
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation.recommended_user.username }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No recommendations available</li>
+        {% endif %}
+    </ul>
+</body>
+</html>

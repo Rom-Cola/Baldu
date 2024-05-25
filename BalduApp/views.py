@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
+from .models import Chat, Recommendation
 
 def startPage(request): # Сторінка з вибором реєстрації або логіном
     return render(request, 'BalduApp/startPage.html')
@@ -35,6 +36,21 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def main_page(request):
+    chats = Chat.objects.filter(participants=request.user)
+    recommendations = Recommendation.objects.filter(user=request.user)
+
+    chat_users = []
+    for chat in chats:
+        other_user = chat.participants.exclude(id=request.user.id).first()
+        chat_users.append(other_user.username if other_user else "Unknown")
+
+    return render(request, 'BalduApp/main_page.html', {
+        'chat_users': chat_users,
+        'recommendations': recommendations
+    })
 
 @login_required
 def profile(request):

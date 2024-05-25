@@ -1,6 +1,6 @@
 
 from django.urls import path
-from BalduApp.views import register, login_view, logout_view, profile, startPage
+from BalduApp.views import register, login_view, logout_view, profile, startPage, main_page
 
 urlpatterns = [
     path('', startPage, name='startPage'), # початкова сторінка з вибором реєстрації або логіном
@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('profile/', profile, name='profile'),
+    path('main/', main_page, name='main_page'),
 ]

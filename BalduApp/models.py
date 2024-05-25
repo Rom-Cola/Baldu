@@ -24,3 +24,17 @@ class User(AbstractUser):
         help_text='Specific permissions for this user.',
         related_query_name='user',
     )
+class Chat(models.Model):
+    participants = models.ManyToManyField(User, related_name='chats')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+class Recommendation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommendations')
+    recommended_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommended_to')
+    created_at = models.DateTimeField(auto_now_add=True)
