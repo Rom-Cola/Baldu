@@ -18,15 +18,21 @@
     </ul>
 
     <h2>Recommendations</h2>
-    <ul>
-        {% if recommendations %}
-            {% for recommendation in recommendations %}
-                <li>{{ recommendation.recommended_user.username }}</li>
-            {% endfor %}
-        {% else %}
-            <li>No recommendations available</li>
-        {% endif %}
-    </ul>
+    {% if current_recommended_user %}
+        <p>{{ current_recommended_user.username }}</p>
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
+            <button type="submit" name="like">Like</button>
+        </form>
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
+            <button type="submit" name="dislike">Dislike</button>
+        </form>
+    {% else %}
+        <p>No more recommendations available.</p>
+    {% endif %}
 
     <h2>Start a New Chat</h2>
     <form method="post">

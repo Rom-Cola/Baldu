@@ -38,3 +38,7 @@ class Recommendation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommendations')
     recommended_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommended_to')
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Dislike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dislikes')
+    disliked_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='disliked_by')

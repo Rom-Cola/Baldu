@@ -72,4 +72,8 @@ class MessageForm(forms.ModelForm):
         model = Message
         fields = ['content']
 
+class LikeForm(forms.Form):
+    user_id = forms.IntegerField(widget=forms.HiddenInput())
 
+class DislikeForm(forms.Form):
+    user_id = forms.IntegerField(widget=forms.HiddenInput())
