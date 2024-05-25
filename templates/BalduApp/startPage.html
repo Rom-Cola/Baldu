@@ -12,15 +12,22 @@
 </head>
 <body>
     <aside>
-        <a href="{% url 'startPage' %}"><span class = 'logo'>Baldu</span></a>
-        <a href="{% url 'register' %}"><button class="register_button" role="button">Зареєструватися</button></a>
-        <a href="{% url 'login' %}"><button class="login_button" role="button">Увійти</button></a>
-
+        <div class="menu">
+            {% include 'BalduApp/logo.html' %}
+            <a href="{% url 'register' %}"><button class="register_button" role="button">Зареєструватися</button></a>
+            <a href="{% url 'login' %}"><button class="login_button" role="button">Увійти</button></a>
+        </div>
+        <div class="main_part">
+            <div class="welcome_text">
+                <h1>Ласкаво просимо на BALDU!</h1>
+                <h2>Раді бачити вас тут</h2>
+                <h3>Створіть свій профіль і знайдіть людину, яка розділить ваші інтереси та мрії.</h3>
+                <p>Реєстрація проста і швидка — почніть свою історію вже зараз</p>
+            </div>
+            <img src="{% static 'BalduApp/img/A_woman_holding_a_phone_BALDU.jpg' %}" alt="A_woman_holding_a_phone">
+        </div>
     </aside>
     <main>
-        {% block content %}
-        {% endblock %}
-        <h1>Головна сторінка</h1>
     </main>
 </body>
 </html>
