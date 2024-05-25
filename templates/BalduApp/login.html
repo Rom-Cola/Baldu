@@ -16,24 +16,24 @@
         <div class="centered">
             <p>Вхід</p>
         </div>
-        
+
         <form method="post">
             {% csrf_token %}
             <p>{{ error }}</p>
             <div class="inputbox">
-                <span>Логін</span> 
-                <input type="text" name="username" id="username" class="form-control" required="required"> 
+                <span>Логін</span>
+                <input type="text" name="username" id="username" class="form-control" required="required">
             </div>
-            
+
             <div class="inputbox">
                 <span>Пароль</span>
-                <input type="password" name="password" id="password" class="form-control" required="required"> 
+                <input type="password" name="password" id="password" class="form-control" required="required">
             </div>
-            
+
             <div class="centered">
                 <button class="submit_button" type="submit">Увійти</button>
             </div>
-            
+
             <div class="dha">
                 <span class="dha-left">Не маєте аккаунту?</span>
                 <span class="dha-right"><a href="{% url 'register' %}">Зареєструватися</a></span>
