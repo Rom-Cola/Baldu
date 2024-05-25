@@ -1,0 +1,28 @@
+body {
+    background: #f4f4f4;
+}
+
+aside {
+    float: left;
+    width: 25%;
+    height: 100vh;
+    color: #000000;
+}
+
+aside .logo {
+    font-size: 96px;
+    margin-left: 50px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: #000000;
+    transition: all .5s ease;
+}
+
+aside .logo:hover {
+    color: #2b0e66;
+}
+
+aside a {
+    text-decoration: none;
+}
