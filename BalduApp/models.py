@@ -1,10 +1,14 @@
+# BalduApp/models.py
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
-    gender = models.CharField(max_length=10, choices=(('M', 'Male'), ('F', 'Female')))
+    gender = models.CharField(max_length=10, choices=(('', ''), ('M', 'Чоловічий'), ('F', 'Жіночий')))
     interests = models.TextField(blank=True)
+    marital_status = models.CharField(max_length=50, choices=(('', ''), ('S', 'Самотній/Самотня'), ('M', 'Одружений/Заміжня'), ('D', 'Розлучений/Розлучена'), ('W', 'Вдівець/Вдова')), blank=True)
+    orientation = models.CharField(max_length=50, blank=True)
 
     groups = models.ManyToManyField(
         'auth.Group',

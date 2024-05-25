@@ -1,10 +1,9 @@
-# Create your views here.
+# BalduApp/views.py
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, SignupForm
-
 
 def startPage(request): # Сторінка з вибором реєстрації або логіном
     return render(request, 'BalduApp/startPage.html')
@@ -40,3 +39,4 @@ def logout_view(request):
 @login_required
 def profile(request):
     return render(request, 'BalduApp/profile.html')
+
