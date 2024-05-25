@@ -19,7 +19,13 @@
 
     <h2>Recommendations</h2>
     {% if current_recommended_user %}
-        <p>{{ current_recommended_user.username }}</p>
+        <p>Username: {{ current_recommended_user.username }}</p>
+        <p>Email: {{ current_recommended_user.email }}</p>
+        <p>Age: {{ current_recommended_user.age }}</p>
+        <p>Gender: {{ current_recommended_user.get_gender_display }}</p>
+        <p>Marital Status: {{ current_recommended_user.get_marital_status_display }}</p>
+        <p>Bio: {{ current_recommended_user.interests }}</p>
+        <p>Orientation: {{ current_recommended_user.orientation }}</p>
         <form method="post" style="display: inline;">
             {% csrf_token %}
             <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">

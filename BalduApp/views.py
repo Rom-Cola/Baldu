@@ -102,6 +102,7 @@ def main_page(request):
 
 
 
+
 @login_required
 def new_chat(request):
     if request.method == 'POST':
