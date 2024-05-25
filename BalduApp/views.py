@@ -88,7 +88,18 @@ def main_page(request):
                 Dislike.objects.create(user=request.user, disliked_user=user)
                 request.session['recommended_index'] += 1
                 return redirect('main_page')
+        elif 'start_chat' in request.POST:
+            form = NewChatForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                user = get_object_or_404(User, username=username)
+                chat = Chat.objects.filter(participants=request.user).filter(participants=user).first()
+                if not chat:
+                    chat = Chat.objects.create()
+                    chat.participants.add(request.user, user)
+                return redirect('chat_detail', chat_id=chat.id)
     else:
+        form = NewChatForm()
         like_form = LikeForm()
         dislike_form = DislikeForm()
 
@@ -96,11 +107,10 @@ def main_page(request):
         'chat_users': chat_users,
         'recommendations': recommendations,
         'current_recommended_user': current_recommended_user,
+        'form': form,
         'like_form': like_form,
         'dislike_form': dislike_form
     })
-
-
 
 
 @login_required
