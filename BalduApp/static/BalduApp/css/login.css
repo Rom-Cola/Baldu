@@ -1,0 +1,87 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #FFFDE4;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    border-radius: 10px;
+    padding: 20px 26px;
+    width: 400px;
+}
+
+.card p{
+    font-size: 30px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
+.dha-left, .dha-right {
+    font-size: 14px;
+}
+
+.dha-left {
+    float: left;
+}
+
+.dha-right {
+    float: right;
+}
+
+.dha-right a{
+    text-decoration: none;
+}
+
+.inputbox {
+    margin-top: 12px;
+    position: relative;
+}
+
+.inputbox input {
+    border: 2px solid #5E5DF0;
+    padding: 0 10px;
+}
+
+.inputbox input:focus {
+    color: #495057;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: none;
+    border: 2px solid #5E5DF0;
+}
+
+.inputbox span{
+    font-size: 15px;
+}
+
+.card button {
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    background: #FFFFFF;
+    color: #5E5DF0;
+    border: 2px solid #5E5DF0;
+    width: 100px;
+    height: 30px;
+    transition: color .5s ease, background .6s ease;
+}
+
+.card button:hover {
+    background: #5E5DF0;
+    color: #FFFFFF;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 35vw;
+
+}
