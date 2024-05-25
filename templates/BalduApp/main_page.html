@@ -1,4 +1,3 @@
-<!-- templates/BalduApp/main_page.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +47,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Start Chat</button>
+        <button type="submit" name="start_chat">Start Chat</button>
     </form>
 </body>
 </html>
