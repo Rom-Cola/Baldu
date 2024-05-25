@@ -1,3 +1,4 @@
+<!-- templates/BalduApp/main_page.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,7 @@
 </head>
 <body>
     <h1>Welcome, {{ user.username }}</h1>
+    <a href="{% url 'profile' %}">View Profile</a>
 
     <h2>Chats</h2>
     <ul>
@@ -19,6 +21,8 @@
 
     <h2>Recommendations</h2>
     {% if current_recommended_user %}
+        <p>First Name: {{ current_recommended_user.first_name }}</p>
+        <p>Last Name: {{ current_recommended_user.last_name }}</p>
         <p>Username: {{ current_recommended_user.username }}</p>
         <p>Email: {{ current_recommended_user.email }}</p>
         <p>Age: {{ current_recommended_user.age }}</p>

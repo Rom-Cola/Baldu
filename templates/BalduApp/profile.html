@@ -1,13 +1,20 @@
+<!-- templates/BalduApp/profile.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Profile</title>
 </head>
 <body>
-    <h2>Welcome, {{ user.username }}</h2>
+    <h1>Profile of {{ user.username }}</h1>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
     <p>Age: {{ user.age }}</p>
-    <p>Gender: {{ user.gender }}</p>
-    <p>Interests: {{ user.interests }}</p>
-    <a href="{% url 'logout' %}">Logout</a>
+    <p>Gender: {{ user.get_gender_display }}</p>
+    <p>Marital Status: {{ user.get_marital_status_display }}</p>
+    <p>Bio: {{ user.interests }}</p>
+    <p>Orientation: {{ user.orientation }}</p>
+    <a href="{% url 'main_page' %}">Back to Main Page</a>
 </body>
 </html>
