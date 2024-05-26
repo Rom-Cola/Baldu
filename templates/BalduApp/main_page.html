@@ -22,8 +22,6 @@
     {% if current_recommended_user %}
         <p>First Name: {{ current_recommended_user.first_name }}</p>
         <p>Last Name: {{ current_recommended_user.last_name }}</p>
-        <p>Username: {{ current_recommended_user.username }}</p>
-        <p>Email: {{ current_recommended_user.email }}</p>
         <p>Age: {{ current_recommended_user.age }}</p>
         <p>Gender: {{ current_recommended_user.get_gender_display }}</p>
         <p>Marital Status: {{ current_recommended_user.get_marital_status_display }}</p>
