@@ -81,11 +81,20 @@ class DislikeForm(forms.Form):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'age', 'gender', 'interests', 'marital_status', 'orientation', 'profile_photo']
+        fields = ['username', 'first_name', 'last_name', 'age', 'gender', 'interests', 'marital_status', 'orientation', 'profile_photo']
 
     def clean_age(self):
         age = self.cleaned_data.get('age')
         if age < 18:
-            raise forms.ValidationError('Вік повинен бути не менше 18 років.')
+            raise forms.ValidationError('Вік повинен бути НЕ МЕНШЕ 18 років.')
+        if age > 118:
+            raise forms.ValidationError('Вік повинен бути НЕ БІЛЬШЕ 118 років.')
         return age
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if len(username) > 16:
+            raise forms.ValidationError('Логін повинен бути НЕ БІЛЬШЕ 16 символів.')
+        return username
+
 

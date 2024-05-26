@@ -20,7 +20,9 @@ def register(request):
         form = SignupForm()
     return render(request, 'BalduApp/register.html', {'form': form})
 
+
 def login_view(request):
+    error_message = None  # Додаємо змінну для збереження повідомлення про помилку
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -30,8 +32,12 @@ def login_view(request):
             if user:
                 login(request, user)
                 return redirect('profile')
+            else:
+                error_message = "Неправильний логін або пароль"  # Повідомлення про помилку
+                return render(request, 'BalduApp/login.html', {'form': form, 'error': error_message})
     else:
         form = LoginForm()
+
     return render(request, 'BalduApp/login.html', {'form': form})
 
 def logout_view(request):
