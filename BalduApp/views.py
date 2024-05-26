@@ -3,8 +3,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, SignupForm, MessageForm, NewChatForm, LikeForm, DislikeForm
+from .forms import LoginForm, SignupForm, MessageForm, NewChatForm, LikeForm, DislikeForm, UserEditForm
 from .models import Chat, Recommendation, User, Dislike, Message
+
 
 def startPage(request): # Сторінка з вибором реєстрації або логіном
     return render(request, 'BalduApp/startPage.html')
@@ -41,7 +42,14 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-    return render(request, 'BalduApp/profile.html')
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Або інший URL для перенаправлення після успішного редагування
+    else:
+        form = UserEditForm(instance=request.user)
+    return render(request, 'BalduApp/profile.html', {'form': form})
 
 @login_required
 def main_page(request):
