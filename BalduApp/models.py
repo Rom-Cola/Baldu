@@ -4,12 +4,13 @@ from django.db import models
 
 class User(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
-    gender = models.CharField(max_length=10, choices=(('', ''), ('M', 'Чоловічий'), ('F', 'Жіночий')))
+    gender = models.CharField(max_length=10, choices=(('', ''), ('M', 'Чоловік'), ('F', 'Жінка')))
     interests = models.TextField(blank=True)
     marital_status = models.CharField(max_length=50, choices=(('', ''), ('S', 'Самотній/Самотня'), ('M', 'Одружений/Заміжня'), ('D', 'Розлучений/Розлучена'), ('W', 'Вдівець/Вдова')), blank=True)
     orientation = models.CharField(max_length=50, blank=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
+    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
 
     groups = models.ManyToManyField(
         'auth.Group',

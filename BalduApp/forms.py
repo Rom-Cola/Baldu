@@ -81,10 +81,11 @@ class DislikeForm(forms.Form):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'age', 'gender', 'interests', 'marital_status', 'orientation']
+        fields = ['username', 'first_name', 'last_name', 'email', 'age', 'gender', 'interests', 'marital_status', 'orientation', 'profile_photo']
 
     def clean_age(self):
         age = self.cleaned_data.get('age')
         if age < 18:
             raise forms.ValidationError('Вік повинен бути не менше 18 років.')
         return age
+
