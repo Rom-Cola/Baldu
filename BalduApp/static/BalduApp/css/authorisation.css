@@ -7,6 +7,18 @@ body {
     position: relative;
 }
 
+p {
+    font-size: 15px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
 .login_body {
     height: 100vh;
 }
@@ -39,11 +51,6 @@ body {
     margin-bottom: 200px;
 }
 
-.card_login p, .card_register p{
-    font-size: 30px;
-    font-weight: 500;
-    color: #5E5DF0;
-}
 
 .dha-left, .dha-right {
     font-size: 14px;

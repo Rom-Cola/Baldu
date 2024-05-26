@@ -68,6 +68,14 @@ aside .current_chats_box {
     display: flex;
 }
 
+.user_info p {
+    color: #2B0E66;
+}
+
+.user_info h1 {
+    color: #2B0E66;
+}
+
 .rating_buttons {
     position: absolute;
     top: 600px;
