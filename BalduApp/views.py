@@ -107,6 +107,8 @@ def main_page(request):
                 username = form.cleaned_data['username']
                 try:
                     user = User.objects.get(username=username)
+                    if user == request.user:
+                        raise Exception("Не можливо почати чат з самим собою")
                     chat = Chat.objects.filter(participants=request.user).filter(participants=user).first()
                     if not chat:
                         chat = Chat.objects.create()
@@ -114,6 +116,17 @@ def main_page(request):
                     return redirect('chat_detail', chat_id=chat.id)
                 except User.DoesNotExist:
                     error_message = "Таку людину не було знайдено"
+                    return render(request, 'BalduApp/main_page.html', {
+                        'chat_users': chat_users,
+                        'recommendations': recommendations,
+                        'current_recommended_user': current_recommended_user,
+                        'form': form,
+                        'like_form': LikeForm,
+                        'dislike_form': Dislike,
+                        'error_message': error_message
+                    })
+                except Exception as e:
+                    error_message = e
                     return render(request, 'BalduApp/main_page.html', {
                         'chat_users': chat_users,
                         'recommendations': recommendations,

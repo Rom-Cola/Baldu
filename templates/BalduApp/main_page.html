@@ -36,6 +36,7 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
+                <p>{{ error_message }}</p>
                 <button type="submit" name="start_chat">Почати чат</button>
             </form>
         </div>
