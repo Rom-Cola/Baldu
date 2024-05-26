@@ -14,12 +14,12 @@
     <aside>
         {% include 'BalduApp/main_logo.html' %}
 
-        <div class="user_profile_link">
+        <div class="user_profile_box">
             <a href="{% url 'profile' %}"><p>Переглянути профіль, {{ user.username }}</p></a>
         </div>
 
         <h2>Чати</h2>
-        <div class="current_chats">
+        <div class="current_chats_box">
             <ul>
                 {% if chat_users %}
                     {% for chat in chat_users %}
@@ -32,7 +32,7 @@
         </div>
 
         <h2>Почати новий чат</h2>
-        <div class="new_chat">
+        <div class="new_chat_box">
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -42,47 +42,54 @@
     </aside>
 
     <main>
-        <h2>Recommendations</h2>
-        {% if current_recommended_user %}
-            {% if user.photo %}
-                <div class="user_photo">
-                    <img src="" alt="recommendation photo" class="recommendation_photo">
+        <div class="main_part">
+            {% if current_recommended_user %}
+                <div class="photo_box">
+                    {% if user.photo %}
+                        <div class="user_photo">
+                            <img src="" alt="recommendation photo" class="recommendation_photo">
+                        </div>
+                    {% else %}
+                        <div class="user_photo">
+                            <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no photo available" class="recommendation_photo">
+                        </div>
+                    {% endif %}
                 </div>
+
+                <div class="user_info">
+                    <h1>{{ current_recommended_user.first_name }} {{ current_recommended_user.last_name }}, {{ current_recommended_user.age }}</h1>
+                    <p>Гендер: {{ current_recommended_user.get_gender_display }}</p>
+
+                    <h1>Про мене:</h1>
+                    <p>{{ current_recommended_user.interests }}</p>
+
+                    <h1>Особиста інформація:</h1>
+                    <p>Сімейний статус: {{ current_recommended_user.get_marital_status_display }}</p>
+                    <p>Оріентація: {{ current_recommended_user.orientation }}</p>
+                </div>
+
+                <div class="rating_buttons">
+                    <form method="post" style="display: inline;" class="like_button">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
+                        <button type="submit" name="like"><img src="{% static 'BalduApp/img/img_heart_button.png' %}" alt="like"></button>
+                    </form>
+                    <form method="post" style="display: inline;" class="dislike_button">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
+                        <button type="submit" name="dislike"><img src="{% static 'BalduApp/img/img_cross_button.png' %}" alt="dislike"></button>
+                    </form>
+                </div>
+
             {% else %}
                 <div class="user_photo">
                     <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no photo available" class="recommendation_photo">
                 </div>
+                <div class="user_info">
+                    <h1>Більше рекомендацій немає.</h1>
+                </div>
             {% endif %}
-
-            <div class="user_info">
-                <h1>{{ current_recommended_user.first_name }} {{ current_recommended_user.last_name }}, {{ current_recommended_user.age }}</h1>
-                <p>Гендер: {{ current_recommended_user.get_gender_display }}</p>
-
-                <h1>Про мене:</h1>
-                <p>{{ current_recommended_user.interests }}</p>
-
-                <h1>Особиста інформація:</h1>
-                <p>Сімейний статус: {{ current_recommended_user.get_marital_status_display }}</p>
-                <p>Оріентація: {{ current_recommended_user.orientation }}</p>
-            </div>
-
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
-                <button type="submit" name="like">Like</button>
-            </form>
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{ current_recommended_user.id }}">
-                <button type="submit" name="dislike">Dislike</button>
-            </form>
-
-        {% else %}
-            <div class="user_photo">
-                <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no photo available" class="recommendation_photo">
-                <p>No more recommendations available.</p>
-            </div>
-        {% endif %}
+        </div>
     </main>
 </body>
 </html>
