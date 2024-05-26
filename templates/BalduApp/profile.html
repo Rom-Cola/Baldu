@@ -9,12 +9,17 @@
     <p>First Name: {{ user.first_name }}</p>
     <p>Last Name: {{ user.last_name }}</p>
     <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
     <p>Age: {{ user.age }}</p>
     <p>Gender: {{ user.get_gender_display }}</p>
     <p>Marital Status: {{ user.get_marital_status_display }}</p>
     <p>Bio: {{ user.interests }}</p>
     <p>Orientation: {{ user.orientation }}</p>
+    <h3>Edit Profile</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save changes</button>
+    </form>
     <a href="{% url 'main_page' %}">Back to Main Page</a>
 </body>
 </html>
