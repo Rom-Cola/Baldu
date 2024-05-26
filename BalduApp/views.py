@@ -68,7 +68,6 @@ def main_page(request):
         other_user = chat.participants.exclude(id=request.user.id).first()
         chat_users.append({'chat_id': chat.id, 'username': other_user.username if other_user else "Unknown"})
 
-    # Filter users for recommendation excluding current user, already recommended and disliked users
     recommended_users = User.objects.exclude(id=request.user.id).exclude(recommended_to__user=request.user).exclude(disliked_by__user=request.user)
 
     if 'recommended_index' not in request.session:
@@ -106,12 +105,24 @@ def main_page(request):
             form = NewChatForm(request.POST)
             if form.is_valid():
                 username = form.cleaned_data['username']
-                user = get_object_or_404(User, username=username)
-                chat = Chat.objects.filter(participants=request.user).filter(participants=user).first()
-                if not chat:
-                    chat = Chat.objects.create()
-                    chat.participants.add(request.user, user)
-                return redirect('chat_detail', chat_id=chat.id)
+                try:
+                    user = User.objects.get(username=username)
+                    chat = Chat.objects.filter(participants=request.user).filter(participants=user).first()
+                    if not chat:
+                        chat = Chat.objects.create()
+                        chat.participants.add(request.user, user)
+                    return redirect('chat_detail', chat_id=chat.id)
+                except User.DoesNotExist:
+                    error_message = "Таку людину не було знайдено"
+                    return render(request, 'BalduApp/main_page.html', {
+                        'chat_users': chat_users,
+                        'recommendations': recommendations,
+                        'current_recommended_user': current_recommended_user,
+                        'form': form,
+                        'like_form': LikeForm,
+                        'dislike_form': Dislike,
+                        'error_message': error_message
+                    })
     else:
         form = NewChatForm()
         like_form = LikeForm()
@@ -125,7 +136,6 @@ def main_page(request):
         'like_form': like_form,
         'dislike_form': dislike_form
     })
-
 
 @login_required
 def new_chat(request):
