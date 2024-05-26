@@ -1,7 +1,7 @@
 body {
     display: flex;
-    align-items: center;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
     flex-direction: column;
     background: #FFFDE4;
     position: relative;
@@ -25,6 +25,7 @@ h1 {
 
 .centered {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -51,16 +52,8 @@ h1 {
     margin-bottom: 200px;
 }
 
-
-.dha-left, .dha-right {
-    font-size: 14px;
-}
-
-.dha-left {
-    float: left;
-}
-
 .dha-right {
+    font-size: 14px;
     float: right;
 }
 

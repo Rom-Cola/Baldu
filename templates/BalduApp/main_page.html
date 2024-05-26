@@ -34,7 +34,6 @@
                         {% else %}
                             <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}"><img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no user photo" class = user_profile_photo> {{ chat.username }}</a></li>
                         {% endif %}
-
                     {% endfor %}
                 {% else %}
                     <li>No chats available</li>
@@ -45,8 +44,11 @@
         <h2>Почати новий чат</h2>
         <div class="new_chat_box">
             <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
+                <div class="inputbox">
+                    <p>Введіть логін: </p>
+                    {% csrf_token %}
+                    {{ form.username }}
+                </div>
                 <p>{{ error_message }}</p>
                 <button type="submit" name="start_chat">Почати чат</button>
             </form>
@@ -57,9 +59,9 @@
         <div class="main_part">
             {% if current_recommended_user %}
                 <div class="photo_box">
-                    {% if user.photo %}
+                    {% if current_recommended_user.profile_photo %}
                         <div class="user_photo">
-                            <img src="" alt="recommendation photo" class="recommendation_photo">
+                            <img src="current_recommended_user.profile_photo.url" alt="recommendation photo" class="recommendation_photo">
                         </div>
                     {% else %}
                         <div class="user_photo">

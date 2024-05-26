@@ -65,13 +65,54 @@ aside ul {
     border-radius: 20px;
 }
 
-aside .current_chats_box {
+.current_chats_box {
     min-height: 200px;
     max-height: 300px;
     position: relative;
     word-wrap: break-word;
     background-clip: border-box;
     overflow-y: auto;
+    margin-bottom: 50px;
+}
+
+.inputbox {
+    display: flex;
+}
+
+.inputbox input {
+    border: 2px solid #5E5DF0;
+    padding: 0 10px;
+    margin-left: 10px;
+    width: 50%;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.inputbox input:focus {
+    color: #495057;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: none;
+    border: 2px solid #5E5DF0;
+}
+
+.new_chat_box button {
+    margin-left: 120px;
+    border-radius: 5px;
+    font-size: 15px;
+    background: #FFFFFF;
+    color: #5E5DF0;
+    border: 2px solid #5E5DF0;
+    width: 100px;
+    height: 30px;
+    transition: color .5s ease, background .6s ease;
+}
+
+.new_chat_box button:hover {
+    background: #5E5DF0;
+    color: #FFFFFF;
 }
 
 .user_photo img {

@@ -66,7 +66,7 @@ def main_page(request):
     chat_users = []
     for chat in chats:
         other_user = chat.participants.exclude(id=request.user.id).first()
-        user = User.objects.exclude(username=other_user.username).first()
+        user = User.objects.filter(username=other_user.username).first()
         chat_users.append({'chat_id': chat.id, 'profile_photo': user.profile_photo,
                            'username': other_user.username if other_user else "Unknown"})
 
