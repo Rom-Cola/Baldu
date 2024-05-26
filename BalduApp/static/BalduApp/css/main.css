@@ -1,0 +1,52 @@
+body {
+    background: #FFFDE4;
+}
+
+aside {
+    width: 400px;
+    height: 100vh;
+    float: left;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+aside a {
+    text-decoration: none;
+}
+
+aside h2 {
+    font-size: 24px;
+}
+
+aside p {
+    font-size: 16px;
+}
+
+aside .user_profile_link, aside .current_chats {
+    width: 100%;
+    float: left;
+    margin-left: 50px;
+}
+
+aside .user_profile_link {
+    height: 100px;
+}
+
+aside .current_chats {
+    height: 250px;
+}
+
+.user_photo img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 600px;
+    border-radius: 25px 0 0 25px;
+    overflow: hidden;
+}
+
+.logo {
+    margin-top: 5px;
+}
