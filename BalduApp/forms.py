@@ -28,7 +28,7 @@ class SignupForm(UserCreationForm):
         label='Стать'
     )
     interests = forms.CharField(
-        widget=forms.Textarea,
+        widget=forms.Textarea(attrs={'maxlength': '200'}),
         required=False,
         label='Інформація про себе'
     )
