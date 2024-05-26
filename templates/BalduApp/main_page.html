@@ -15,7 +15,13 @@
         {% include 'BalduApp/main_logo.html' %}
 
         <div class="user_profile_box">
-            <a href="{% url 'profile' %}"><p>Переглянути профіль, {{ user.username }}</p></a>
+            <a href="{% url 'profile' %}"><p>
+                {% if user.profile_photo %}
+                    <img src="{{ user.profile_photo.url }}" alt="user photo" class = user_profile_photo> {{ user.username }}
+                {% else %}
+                    <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="user photo" class = user_profile_photo> {{ user.username }}
+                {% endif %}
+            </p></a>
         </div>
 
         <h2>Чати</h2>
@@ -23,7 +29,12 @@
             <ul>
                 {% if chat_users %}
                     {% for chat in chat_users %}
-                        <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}">Чат з {{ chat.username }}</a></li>
+                        {% if chat.profile_photo %}
+                            <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}"><img src="{{ chat.profile_photo.url }}" alt="user photo" class = user_profile_photo> {{ chat.username }}</a></li>
+                        {% else %}
+                            <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}"><img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no user photo" class = user_profile_photo> {{ chat.username }}</a></li>
+                        {% endif %}
+
                     {% endfor %}
                 {% else %}
                     <li>No chats available</li>
