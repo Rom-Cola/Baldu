@@ -100,3 +100,8 @@ aside button:hover {
     width: 40vw;
     float: left;
 }
+
+.logo {
+    margin-left: 150px;
+    margin-top: 5px;
+}
