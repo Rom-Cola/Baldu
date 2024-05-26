@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Profile of {{ user.username }}</h1>
+    {% if user.profile_photo %}
+    <img src="{{ user.profile_photo.url }}" alt="Profile photo">
+    {% endif %}
     <p>First Name: {{ user.first_name }}</p>
     <p>Last Name: {{ user.last_name }}</p>
     <p>Username: {{ user.username }}</p>
@@ -15,7 +18,7 @@
     <p>Bio: {{ user.interests }}</p>
     <p>Orientation: {{ user.orientation }}</p>
     <h3>Edit Profile</h3>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save changes</button>

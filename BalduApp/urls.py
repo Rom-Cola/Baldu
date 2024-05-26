@@ -1,5 +1,7 @@
-
+from django.conf.urls.static import static
 from django.urls import path
+
+from Baldu import settings
 from BalduApp.views import register, login_view, logout_view, profile, startPage, main_page, chat_detail
 
 urlpatterns = [
@@ -12,3 +14,7 @@ urlpatterns = [
     path('chat/<int:chat_id>/', chat_detail, name='chat_detail'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

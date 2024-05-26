@@ -43,10 +43,10 @@ def logout_view(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = UserEditForm(request.POST, instance=request.user)
+        form = UserEditForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Або інший URL для перенаправлення після успішного редагування
+            return redirect('profile')
     else:
         form = UserEditForm(instance=request.user)
     return render(request, 'BalduApp/profile.html', {'form': form})

@@ -7,6 +7,11 @@
     <h1>Chat with {{ other_user.username }}</h1>
     <div>
         {% for message in messages %}
+            {% if message.sender.profile_photo.url %}
+            <img src="{{ message.sender.profile_photo.url }}" alt="Profile photo">
+            {% else %}
+            <img src="path/to/default/photo.jpg" alt="Default photo">
+            {% endif %}
             <p><strong>{{ message.sender.username }}:</strong> {{ message.content }}</p>
         {% endfor %}
     </div>
