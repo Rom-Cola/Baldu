@@ -1,0 +1,133 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #FFFDE4;
+    position: relative;
+}
+
+.login_body {
+    height: 100vh;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+
+.card_login {
+    width: 400px;
+}
+
+
+.card_login, .card_register {
+    position: relative;
+    flex-direction: column;
+    min-width: 0;
+    border-radius: 10px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #dee2e6;
+    padding: 20px 26px;
+    display: flex;
+}
+
+.card_register {
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+.card_login p, .card_register p{
+    font-size: 30px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
+.dha-left, .dha-right {
+    font-size: 14px;
+}
+
+.dha-left {
+    float: left;
+}
+
+.dha-right {
+    float: right;
+}
+
+.dha-right a{
+    text-decoration: none;
+}
+
+.inputbox {
+    margin-top: 12px;
+    position: relative;
+}
+
+.inputbox input, .inputbox select, .inputbox textarea {
+    border: 2px solid #5E5DF0;
+    padding: 0 10px;
+    width: 100%;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 0.25rem;
+}
+
+.inputbox input, .inputbox select {
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.inputbox textarea {
+    height: calc((1.5em + 0.75rem + 2px) * 2);
+    resize: none;
+}
+
+.inputbox input:focus {
+    color: #495057;
+    background-color: #fff;
+    outline: 0;
+    box-shadow: none;
+    border: 2px solid #5E5DF0;
+}
+
+.inputbox input::placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+.inputbox input:disabled,
+.inputbox input[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.inputbox span{
+    font-size: 15px;
+}
+
+.card_login button, .card_register button {
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    background: #FFFFFF;
+    color: #5E5DF0;
+    border: 2px solid #5E5DF0;
+    width: 100px;
+    height: 30px;
+    transition: color .5s ease, background .6s ease;
+}
+
+.card_login button:hover, .card_register button:hover {
+    background: #5E5DF0;
+    color: #FFFFFF;
+}
+
+.logo_container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
