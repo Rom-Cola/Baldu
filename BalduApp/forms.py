@@ -73,9 +73,21 @@ class NewChatForm(forms.Form):
     username = forms.CharField(max_length=30, label='Username')
 
 class MessageForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'maxlength': '200',
+            'placeholder': 'Введіть повідомлення: '
+        }),
+        required=False,
+        label='Ваше повідомлення'
+    )
+
     class Meta:
         model = Message
         fields = ['content']
+        labels = {
+            'content': 'Введіть повідомлення: '
+        }
 
 class LikeForm(forms.Form):
     user_id = forms.IntegerField(widget=forms.HiddenInput())
@@ -101,7 +113,7 @@ class UserEditForm(forms.ModelForm):
             'gender': 'Гендер',
             'interests': 'Про себе',
             'marital_status': 'Сімейний статус',
-            'orientation': 'Оріентація',
+            'orientation': 'Оріентація'
         }
 
     def clean_age(self):

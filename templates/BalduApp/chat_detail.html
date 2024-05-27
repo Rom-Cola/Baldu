@@ -1,25 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Чат з {{ other_user.username }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'BalduApp/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'BalduApp/css/chat.css' %}">
 </head>
 <body>
-    <h1>Chat with {{ other_user.username }}</h1>
-    <div>
-        {% for message in messages %}
-            {% if message.sender.profile_photo %}
-            <img src="{{ message.sender.profile_photo.url }}" alt="Profile photo">
-            {% else %}
-            <img src="path/to/default/photo.jpg" alt="Default photo">
-            {% endif %}
-            <p><strong>{{ message.sender.username }}:</strong> {{ message.content }}</p>
-        {% endfor %}
+    <div class="head_container">
+        {% include 'BalduApp/main_logo.html' %}
     </div>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Send</button>
-    </form>
-    <a href="{% url 'main_page' %}">Back to Main Page</a>
+
+    <div class="chat_container">
+        <div class="chat_info">
+            {% if other_user.profile_photo %}
+                <div class="user_profile_photo_box">
+                    <img src="{{ other_user.profile_photo.url }}" alt="Profile photo" class="user_profile_photo">
+                </div>
+            {% else %}
+                <div class="user_profile_photo_box">
+                    <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="No profile photo" class="user_profile_photo">
+                </div>
+            {% endif %}
+            <h1>Чат з {{ other_user.username }}</h1>
+        </div>
+        <div class="messages_box">
+            {% for message in messages %}
+                <div {% if message.sender == other_user %} class="chat_message_box" {% else %} class="self_chat_message_box" {% endif %} >
+                    {% if message.sender.profile_photo %}
+                    <div class="user_profile_photo_box">
+                        <img src="{{ message.sender.profile_photo.url }}" alt="Profile photo" class="user_profile_photo"> <p><strong>{{ message.sender.username }}:</strong></p>
+                    </div>
+                    {% else %}
+                    <div class="user_profile_photo_box">
+                        <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="No profile photo" class="user_profile_photo"> <p><strong>{{ message.sender.username }}:</strong></p>
+                    </div>
+                    {% endif %}
+                    <p class="message_paragraph">{{ message.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.content }}
+            <button type="submit" class="send_message"><p>></p></button>
+        </form>
+    </div>
 </body>
 </html>
