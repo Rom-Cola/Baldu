@@ -1,7 +1,7 @@
 body {
     display: flex;
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     background: #FFFDE4;
     position: relative;
@@ -37,7 +37,6 @@ h1 {
 .card_login, .card_register {
     position: relative;
     flex-direction: column;
-    min-width: 0;
     border-radius: 10px;
     word-wrap: break-word;
     background-color: #fff;

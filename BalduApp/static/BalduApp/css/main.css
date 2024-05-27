@@ -23,6 +23,7 @@ aside a {
 
 aside h2 {
     font-size: 24px;
+    margin-bottom: 20px;
 }
 
 aside p {
@@ -33,24 +34,35 @@ aside ul {
   list-style-type: none;
 }
 
-.current_chats_box li {
-    margin-bottom: 10px;
-}
-
-.user_profile_box, .current_chats_box, .new_chat_box {
+.user_profile_box, .new_chat_box {
     width: 100%;
     float: left;
-    margin-left: 50px;
+}
+
+.new_chat_box {
+    margin-left: 80px;
 }
 
 .user_profile_box {
-    height: 100px;
-    padding-left: 20px;
-    padding-top: 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    padding: 8px 24px;
 }
 
-.user_profile_photo{
+.user_profile_box a, .chat_box a {
+    color: #2B0E66;
+    font-size: 18px;
+}
+
+.user_profile_box a:hover, .chat_box a:hover {
+    color: #7776f0;
+}
+
+.user_profile_photo, .chat_box img {
     object-fit: cover;
+    margin-right: 10px;
 }
 
 .user_profile_box .user_profile_photo {
@@ -65,15 +77,40 @@ aside ul {
     border-radius: 20px;
 }
 
+.user_profile_image .user_profile_photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+}
+
 .current_chats_box {
+    width: 350px;
+    float: left;
+    display: flex;
+    flex-direction: column;
     min-height: 200px;
     max-height: 300px;
-    position: relative;
     word-wrap: break-word;
     background-clip: border-box;
     overflow-y: auto;
     margin-bottom: 50px;
 }
+
+.user_profile_box, .chat_box {
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #dee2e6;
+    align-items: center;
+
+}
+
+.chat_box {
+    width: 250px;
+    padding: 6px 20px;
+}
+
 
 .inputbox {
     display: flex;
@@ -88,6 +125,8 @@ aside ul {
     background-clip: padding-box;
     border-radius: 0.25rem;
     height: calc(1.5em + 0.75rem + 2px);
+    position: relative;
+    top: -5px;
 }
 
 .inputbox input:focus {
@@ -121,6 +160,7 @@ aside ul {
     height: 600px;
     border-radius: 25px 0 0 25px;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .logo {
@@ -145,7 +185,9 @@ aside ul {
 }
 
 .user_info h1 {
+    margin-top: 20px;
     color: #2B0E66;
+    font-size: 30px;
 }
 
 .rating_buttons {
@@ -175,3 +217,8 @@ aside ul {
     margin-right: 80px;
 }
 
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
