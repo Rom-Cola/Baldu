@@ -91,7 +91,7 @@ def main_page(request):
                 if not chat:
                     chat = Chat.objects.create()
                     chat.participants.add(request.user, user)
-                Message.objects.create(chat=chat, sender=request.user, content="Hi! Let's chat!")
+                Message.objects.create(chat=chat, sender=request.user, content="Привіт! Давай познайомимось!")
                 Recommendation.objects.create(user=request.user, recommended_user=user)
                 request.session['recommended_index'] += 1
                 return redirect('main_page')
@@ -151,21 +151,6 @@ def main_page(request):
         'like_form': like_form,
         'dislike_form': dislike_form
     })
-
-@login_required
-def new_chat(request):
-    if request.method == 'POST':
-        form = NewChatForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            user = get_object_or_404(User, username=username)
-            chat, created = Chat.objects.get_or_create(participants__in=[request.user, user])
-            chat.participants.add(request.user, user)
-            return redirect('chat_detail', chat_id=chat.id)
-    else:
-        form = NewChatForm()
-    return render(request, 'BalduApp/new_chat.html', {'form': form})
-
 
 @login_required
 def chat_detail(request, chat_id):

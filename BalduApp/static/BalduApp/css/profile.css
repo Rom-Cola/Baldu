@@ -3,8 +3,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #FFFDE4;
-    position: relative;
 }
 
 input, select, textarea {
@@ -44,12 +42,6 @@ input[readonly] {
     opacity: 1;
 }
 
-.head_container {
-    background: #ffffff;
-    width: 100vw;
-    height: 100px;
-}
-
 .profile_container {
     max-width: 1000px;
     min-width: 800px;
@@ -67,7 +59,7 @@ input[readonly] {
 }
 
 .logo {
-    margin-left: 100px;
+    margin-left: 120px;
 }
 
 .logout {

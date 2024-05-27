@@ -38,7 +38,7 @@ class SignupForm(UserCreationForm):
         label='Інформація про себе'
     )
     marital_status = forms.ChoiceField(
-        choices=(('', ''), ('S', 'Самотній/Самотня'), ('M', 'Одружений/Заміжня'), ('D', 'Розлучений/Розлучена'), ('W', 'Вдівець/Вдова')),
+        choices=(('', ''), ('S', 'Самотній/Самотня'), ('M', 'Одружений/Заміжня'), ('D', 'Розлучений/Розлучена'), ('W', 'Вдівець/Вдова'), ('V', 'У відносинах')),
         required=False,
         label='Сімейний статус'
     )
@@ -61,9 +61,34 @@ class SignupForm(UserCreationForm):
     def clean_age(self):
         age = self.cleaned_data.get('age')
         if age < 18:
-            raise forms.ValidationError('Вік повинен бути не менше 18 років.')
+            raise forms.ValidationError('Вік повинен бути НЕ МЕНШЕ 18 років.')
+        if age > 118:
+            raise forms.ValidationError('Вік повинен бути НЕ БІЛЬШЕ 118 років.')
         return age
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if len(username) > 16:
+            raise forms.ValidationError('Логін повинен бути НЕ БІЛЬШЕ 16 символів.')
+        return username
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if len(first_name) > 16:
+            raise forms.ValidationError('Ім\'я повинне бути НЕ БІЛЬШЕ 16 символів.')
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if len(last_name) > 16:
+            raise forms.ValidationError('Прізвище повинен бути НЕ БІЛЬШЕ 16 символів.')
+        return last_name
+
+    def clean_orientation(self):
+        orientation = self.cleaned_data.get('orientation')
+        if len(orientation) > 30:
+            raise forms.ValidationError('Орієнтація повинна бути НЕ БІЛЬШЕ 30 символів.')
+        return orientation
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Логін')
@@ -73,9 +98,21 @@ class NewChatForm(forms.Form):
     username = forms.CharField(max_length=30, label='Username')
 
 class MessageForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'maxlength': '200',
+            'placeholder': 'Введіть повідомлення: '
+        }),
+        required=False,
+        label='Ваше повідомлення'
+    )
+
     class Meta:
         model = Message
         fields = ['content']
+        labels = {
+            'content': 'Введіть повідомлення: '
+        }
 
 class LikeForm(forms.Form):
     user_id = forms.IntegerField(widget=forms.HiddenInput())
@@ -101,7 +138,7 @@ class UserEditForm(forms.ModelForm):
             'gender': 'Гендер',
             'interests': 'Про себе',
             'marital_status': 'Сімейний статус',
-            'orientation': 'Оріентація',
+            'orientation': 'Оріентація'
         }
 
     def clean_age(self):
