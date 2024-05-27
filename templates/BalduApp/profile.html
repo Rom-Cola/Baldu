@@ -1,30 +1,46 @@
-<!-- templates/BalduApp/profile.html -->
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Профіль</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'BalduApp/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'BalduApp/css/profile.css' %}">
 </head>
 <body>
-    <h1>Profile of {{ user.username }}</h1>
-    {% if user.profile_photo %}
-    <img src="{{ user.profile_photo.url }}" alt="Profile photo">
-    {% endif %}
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Username: {{ user.username }}</p>
-    <p>Age: {{ user.age }}</p>
-    <p>Gender: {{ user.get_gender_display }}</p>
-    <p>Marital Status: {{ user.get_marital_status_display }}</p>
-    <p>Bio: {{ user.interests }}</p>
-    <p>Orientation: {{ user.orientation }}</p>
-    <h3>Edit Profile</h3>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save changes</button>
-    </form>
-    <a href="{% url 'main_page' %}"><button>Back to Main Page</button></a>
-    <a href="{% url 'logout' %}"><button>Logout</button></a>
+    <div class="head_container">
+        {% include 'BalduApp/main_logo.html' %}
+        <a href="{% url 'logout' %}"><button class="logout">Розлогінитись</button></a>
+    </div>
+
+    <div class="profile_container">
+        <div class="centered">
+            <h1>Редагувати профіль {{ user.username }}</h1>
+        </div>
+        {% if user.profile_photo %}
+            <div class="user_profile_image">
+                <img src="{{ user.profile_photo.url }}" alt="Profile photo" class = user_profile_photo>
+
+            </div>
+        {% else %}
+            <div class="user_profile_image">
+                <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no user photo" class = user_profile_photo>
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="centered">
+                <button type="submit" class="save_changes">зберегти зміни</button>
+            </div>
+        </form>
+
+    </div>
 
 </body>
 </html>

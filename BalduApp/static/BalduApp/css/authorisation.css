@@ -7,12 +7,25 @@ body {
     position: relative;
 }
 
+p {
+    font-size: 15px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #5E5DF0;
+}
+
 .login_body {
     height: 100vh;
 }
 
 .centered {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -24,7 +37,6 @@ body {
 .card_login, .card_register {
     position: relative;
     flex-direction: column;
-    min-width: 0;
     border-radius: 10px;
     word-wrap: break-word;
     background-color: #fff;
@@ -39,21 +51,8 @@ body {
     margin-bottom: 200px;
 }
 
-.card_login p, .card_register p{
-    font-size: 30px;
-    font-weight: 500;
-    color: #5E5DF0;
-}
-
-.dha-left, .dha-right {
-    font-size: 14px;
-}
-
-.dha-left {
-    float: left;
-}
-
 .dha-right {
+    font-size: 14px;
     float: right;
 }
 

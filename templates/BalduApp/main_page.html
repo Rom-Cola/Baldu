@@ -15,27 +15,44 @@
         {% include 'BalduApp/main_logo.html' %}
 
         <div class="user_profile_box">
-            <a href="{% url 'profile' %}"><p>Переглянути профіль, {{ user.username }}</p></a>
+            <a href="{% url 'profile' %}">
+                {% if user.profile_photo %}
+                    <img src="{{ user.profile_photo.url }}" alt="user photo" class = user_profile_photo> {{ user.username }}
+                {% else %}
+                    <img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="user photo" class = user_profile_photo> {{ user.username }}
+                {% endif %}
+            </a>
         </div>
-
+        
         <h2>Чати</h2>
-        <div class="current_chats_box">
-            <ul>
+        <ul>
+            <div class="current_chats_box">
                 {% if chat_users %}
                     {% for chat in chat_users %}
-                        <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}">Чат з {{ chat.username }}</a></li>
+                        {% if chat.profile_photo %}
+                            <div class="chat_box">
+                                <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}"><img src="{{ chat.profile_photo.url }}" alt="user photo" class = user_profile_photo> {{ chat.username }}</a></li>
+                            </div>
+                        {% else %}
+                            <div class="chat_box">
+                                <li><a href="{% url 'chat_detail' chat_id=chat.chat_id %}"><img src="{% static 'BalduApp/img/no_photo.jpg' %}" alt="no user photo" class = user_profile_photo> {{ chat.username }}</a></li>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <li>No chats available</li>
                 {% endif %}
-            </ul>
-        </div>
-
+            </div>
+        </ul>
+        
         <h2>Почати новий чат</h2>
         <div class="new_chat_box">
             <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
+                <div class="inputbox">
+                    <p>Введіть логін: </p>
+                    {% csrf_token %}
+                    {{ form.username }}
+                </div>
                 <p>{{ error_message }}</p>
                 <button type="submit" name="start_chat">Почати чат</button>
             </form>
@@ -46,9 +63,9 @@
         <div class="main_part">
             {% if current_recommended_user %}
                 <div class="photo_box">
-                    {% if user.photo %}
+                    {% if current_recommended_user.profile_photo %}
                         <div class="user_photo">
-                            <img src="" alt="recommendation photo" class="recommendation_photo">
+                            <img src="{{ current_recommended_user.profile_photo.url }}" alt="recommendation photo" class="recommendation_photo">
                         </div>
                     {% else %}
                         <div class="user_photo">
