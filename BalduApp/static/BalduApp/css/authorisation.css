@@ -25,6 +25,7 @@ h1 {
 
 .centered {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -36,7 +37,6 @@ h1 {
 .card_login, .card_register {
     position: relative;
     flex-direction: column;
-    min-width: 0;
     border-radius: 10px;
     word-wrap: break-word;
     background-color: #fff;
@@ -51,16 +51,8 @@ h1 {
     margin-bottom: 200px;
 }
 
-
-.dha-left, .dha-right {
-    font-size: 14px;
-}
-
-.dha-left {
-    float: left;
-}
-
 .dha-right {
+    font-size: 14px;
     float: right;
 }
 

@@ -6,6 +6,11 @@ from .models import User, Message
 
 
 class SignupForm(UserCreationForm):
+    username = forms.CharField(
+        max_length=30,
+        required=True,
+        label='Логін'
+    )
     first_name = forms.CharField(
         max_length=30,
         required=True,
@@ -90,12 +95,24 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
 
 class NewChatForm(forms.Form):
-    username = forms.CharField(max_length=150, label='Username')
+    username = forms.CharField(max_length=30, label='Username')
 
 class MessageForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'maxlength': '200',
+            'placeholder': 'Введіть повідомлення: '
+        }),
+        required=False,
+        label='Ваше повідомлення'
+    )
+
     class Meta:
         model = Message
         fields = ['content']
+        labels = {
+            'content': 'Введіть повідомлення: '
+        }
 
 class LikeForm(forms.Form):
     user_id = forms.IntegerField(widget=forms.HiddenInput())
@@ -104,9 +121,25 @@ class DislikeForm(forms.Form):
     user_id = forms.IntegerField(widget=forms.HiddenInput())
 
 class UserEditForm(forms.ModelForm):
+    username = forms.CharField(
+        max_length=30,
+        required=True,
+        label='Логін'
+    )
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'age', 'gender', 'interests', 'marital_status', 'orientation', 'profile_photo']
+        labels = {
+            'username': 'Логін',
+            'first_name': 'Ім\'я',
+            'last_name': 'Прізвище',
+            'age': 'Вік',
+            'gender': 'Гендер',
+            'interests': 'Про себе',
+            'marital_status': 'Сімейний статус',
+            'orientation': 'Оріентація'
+        }
 
     def clean_age(self):
         age = self.cleaned_data.get('age')
@@ -115,11 +148,3 @@ class UserEditForm(forms.ModelForm):
         if age > 118:
             raise forms.ValidationError('Вік повинен бути НЕ БІЛЬШЕ 118 років.')
         return age
-
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if len(username) > 16:
-            raise forms.ValidationError('Логін повинен бути НЕ БІЛЬШЕ 16 символів.')
-        return username
-
-

@@ -34,14 +34,13 @@
                 {{ form.password.errors }}
             </div>
 
+            <span class="dha-right"><a href="{% url 'register' %}">Не маєте аккаунту?</a></span><br>
+
+            
             <div class="centered">
                 <button class="submit_button" type="submit">Увійти</button>
             </div>
 
-            <div class="dha">
-                <span class="dha-left">Не маєте аккаунту?</span>
-                <span class="dha-right"><a href="{% url 'register' %}">Зареєструватися</a></span>
-            </div>
         </form>
     </div>
 
